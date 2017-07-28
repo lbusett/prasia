@@ -36,9 +36,8 @@ ncores <- 8
 clust <- parallel::makeCluster(ncores, outfile = "")
 doSNOW::registerDoSNOW(clust)
 
-out <- foreach(vrt_n = seq_len(vrts),
+out <- foreach(vrt_n = seq_along(vrts),
                .combine      = "c",
-               .verbose      = FALSE,
                .packages     = c("gdalUtils"),
                .verbose      = TRUE) %dopar% {
 
