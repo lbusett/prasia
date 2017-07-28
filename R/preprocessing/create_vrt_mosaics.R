@@ -19,5 +19,10 @@ create_vrt_mosaics <- function (mosaics_folder, pattern) {
 library(tidyverse)
 library(gdalUtils)
 mosaics_folder <- "/home/lbusetto/nas-s4a/nr_working/shared/PhenoRice/Asia/Data/mosaics/by_year/"
-pattern <- "eos"
-create_vrt_mosaics(mosaics_folder, "eos")
+patterns <- c("sos", "eos", "pos", "cumevi", "veglgt", "totlgt", "nseas")
+
+for (pattern in patterns) {
+  print(pattern)
+  create_vrt_mosaics(mosaics_folder, pattern)
+}
+
