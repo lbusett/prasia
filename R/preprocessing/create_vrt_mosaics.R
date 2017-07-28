@@ -9,7 +9,8 @@ create_vrt_mosaics <- function(mosaics_folder, pattern) {
     dplyr::arrange(year, season )
   ordered_files <- names$fullname[1:5]
 
-  vrt_file <- file.path(mosaics_folder, paste0(pattern, "_ordered.vrt"))
+  vrt_file <- file.path(mosaics_folder, "vrts", paste0(pattern, "_ordered.vrt"))
+  dir.create(dirname(vrt_file))
   gdalUtils::gdalbuildvrt(ordered_files, vrt_file, separate = T, overwrite = T)
 
 }
@@ -32,7 +33,7 @@ outfold <- "/home/lbusetto/nas-s4a/nr_working/shared/PhenoRice/Asia/Data/mosaics
 dir.create(outfold)
 
 ncores <- 8
-clust <- parallel::makeCluster(ncores, outfile = "")
+clust <- parallel::makeCluster(ncores, outfile = " ")
 doSNOW::registerDoSNOW(clust)
 
 out <- foreach(vrt_n = seq_along(vrts),
